@@ -1,10 +1,12 @@
 package homemade.things.ap.it.domosecurityhome;
 
-import android.app.Activity;
+import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.os.AsyncTask;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -12,8 +14,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.things.pio.Gpio;
-import com.google.android.things.pio.PeripheralManager;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,67 +24,27 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
- * Skeleton of an Android Things activity.
- * <p>
- * Android Things peripheral APIs are accessible through the class
- * PeripheralManagerService. For example, the snippet below will open a GPIO pin and
- * set it to HIGH:
- * <p>
- * <pre>{@code
- * PeripheralManagerService service = new PeripheralManagerService();
- * mLedGpio = service.openGpio("BCM6");
- * mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_LOW);
- * mLedGpio.setValue(true);
- * }</pre>
- * <p>
- * For more complex peripherals, look for an existing user-space driver, or implement one if none
- * is available.
- *
- * @see <a href="https://github.cdom/androidthings/contrib-drivers#readme">https://github.com/androidthings/contrib-drivers#readme</a>
- */
-public class MainActivityT extends Activity {
+import static android.graphics.Color.*;
+import static org.apache.http.params.CoreConnectionPNames.CONNECTION_TIMEOUT;
 
-    home1 canvas1;
-    private Rect rectTapp1 = new Rect(100, 250, 1660, 289);
+
+public class MainActivity extends AppCompatActivity {
+
+    home canvas1;
+    private Rect rectTapp1 = new Rect(120, 560, 230, 710);
+    private Rect rectTapp2 = new Rect(310, 380, 400, 485);
     private Rect rectLuceTenda = new Rect(65, 65, 130, 130);
-    private Rect rectTapp2 = new Rect(218, 95, 263, 170);
-    private Rect rectPiano = new Rect(35, 419, 282, 444);
-    private Rect rectClear = new Rect(320, 314, 420, 360);
     TextView txtDispo;
     private int intDispo = 0;
-
-    // GPIO Pin Name
-    private Gpio mLedGpio;
-    //autooff
-    private Handler mHandler = new Handler();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        try {
-            String pinName = "BCM21";
-            mLedGpio = PeripheralManager.getInstance().openGpio(pinName);
-            mLedGpio.setDirection(Gpio.DIRECTION_OUT_INITIALLY_HIGH);
-            mLedGpio.setValue(false);
-            Log.i("displ", "Start blinking LED GPIO pin");
-            // Post a Runnable that continuously switch the state of the GPIO, blinking the
-            // corresponding LED
-            mHandler.post(mBlinkRunnable);
-
-        } catch (IOException e) {
-            Log.e("displ", "Error on PeripheralIO API", e);
-        }
-
         canvas1 = findViewById(R.id.home);
 
-        canvas1.intMolt = 1f;
-
-
+        canvas1.intMolt = 1.5f;
 
         Button btnApri = findViewById(R.id.apri);
         Button btnChiudi = findViewById(R.id.chiudi);
@@ -108,10 +71,10 @@ public class MainActivityT extends Activity {
 
                         if (canvas1.intPiano==2) {
                             canvas1.intPiano=1;
-                            canvas1.intMolt = 1f;
+                            canvas1.intMolt = 1.5f;
                         } else if (canvas1.intPiano==1) {
                             canvas1.intPiano=2;
-                            canvas1.intMolt = 0.7f;
+                            canvas1.intMolt = 1.1f;
                         }
 
                         canvas1.invalidate();
@@ -134,6 +97,7 @@ public class MainActivityT extends Activity {
                 new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Power1%20Off","","http://192.168.1.207/cm?cmnd=Power2%20Off");
             }
         });
+
         btnApri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -147,7 +111,7 @@ public class MainActivityT extends Activity {
                     new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power%20On","","");
                 }
                 if (intDispo == 0){
-                    Toast.makeText(getApplicationContext(), "Seleziona prima il\n     dispositivo",
+                    Toast.makeText(getApplicationContext(), "Seleziona prima il\n      dispositivo",
                             Toast.LENGTH_LONG).show();
 
                 }
@@ -172,12 +136,14 @@ public class MainActivityT extends Activity {
                     new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power%20Off","","");
                 }
                 if (intDispo == 0){
-                    Toast.makeText(getApplicationContext(), "Fai click sul dispositivo",
+                    Toast.makeText(getApplicationContext(), "Seleziona prima il\n     dispositivo",
                             Toast.LENGTH_LONG).show();
 
                 }
             }
         });
+
+
         btnApriT1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -210,7 +176,6 @@ public class MainActivityT extends Activity {
                 return false;
             }
         });
-
 
 
 
@@ -288,7 +253,7 @@ public class MainActivityT extends Activity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //Toast.makeText(getApplicationContext(), "Invio comando al dispositivo2",Toast.LENGTH_LONG).show();
+           //Toast.makeText(getApplicationContext(), "Invio comando al dispositivo2",Toast.LENGTH_LONG).show();
         }
 
         @Override
@@ -336,7 +301,7 @@ public class MainActivityT extends Activity {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            //Toast.makeText(getApplicationContext(), result,                    Toast.LENGTH_LONG).show();
+
         }
 
     }
@@ -346,30 +311,25 @@ public class MainActivityT extends Activity {
 
         int x = (int)event.getX();
         int y = (int)event.getY();
-        mHandler.post(mBlinkRunnable);
 
         if (event.getAction() == MotionEvent.ACTION_UP) {
-            Log.i("XY","x:"+x +" y:"+y);
-            if (rectTapp1.contains(x,y)) {
-                Log.i("XY","BOOM1!");
-                txtDispo.setText("Tapparella1");
-                intDispo = 1;
-            }
-            if (rectTapp2.contains(x,y)) {
-                Log.i("XY", "BOOM2!");
-                txtDispo.setText("Tapparella2");
-                intDispo = 2;
-            }
+                Log.i("XY","x:"+x +" y:"+y);
+                if (rectTapp1.contains(x,y)) {
+                    Log.i("XY","BOOM1!");
+                    txtDispo.setText("Tapparella1");
+                    intDispo = 1;
+                }
+                if (rectTapp2.contains(x,y)) {
+                    Log.i("XY", "BOOM2!");
+                    txtDispo.setText("Tapparella2");
+                    intDispo = 2;
+                }
             if (rectLuceTenda.contains(x,y)) {
                 Log.i("XY", "BOOM2!");
                 txtDispo.setText("LuceTenda");
                 intDispo = 3;
             }
-            if (rectClear.contains(x,y)) {
-                Log.i("XY", "CLEAR!");
-                txtDispo.setText("---");
-                intDispo = 0;
-            }
+
         }
 
 
@@ -377,44 +337,5 @@ public class MainActivityT extends Activity {
         return false;
     }
 
-    private Runnable mBlinkRunnable = new Runnable() {
-        @Override
-        public void run() {
-            // Exit Runnable if the GPIO is already closed
-            if (mLedGpio == null) {
-                return;
-            }
-            try {
-                // Toggle the GPIO state
-                mLedGpio.setValue(true);
-                Log.i("displ", "State set to on");
-                mHandler.postDelayed(mBlinkRunnableoff, 1000*60*5);
 
-            } catch (IOException e) {
-                Log.e("displ", "Error on PeripheralIO API", e);
-            }
-        }
-    };
-
-    private Runnable mBlinkRunnableoff = new Runnable() {
-        @Override
-        public void run() {
-            // Exit Runnable if the GPIO is already closed
-            if (mLedGpio == null) {
-                return;
-            }
-            try {
-                // Toggle the GPIO state
-                mLedGpio.setValue(false);
-                Log.i("displ", "State set to off");
-                txtDispo.setText("---");
-                intDispo = 0;
-
-                // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
-
-            } catch (IOException e) {
-                Log.e("displ", "Error on PeripheralIO API", e);
-            }
-        }
-    };
 }
