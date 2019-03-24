@@ -46,6 +46,7 @@ public class MainActivityT extends Activity {
     private Rect rectTapp1 = new Rect(100, 250, 1660, 289);
     private Rect rectLuceTenda = new Rect(65, 65, 130, 130);
     private Rect rectTapp2 = new Rect(218, 95, 263, 170);
+    private Rect rectTapp3 = new Rect(451, 103, 507, 163);
     private Rect rectPiano = new Rect(35, 419, 282, 444);
     private Rect rectClear = new Rect(320, 314, 420, 360);
     TextView txtDispo;
@@ -89,6 +90,8 @@ public class MainActivityT extends Activity {
         Button btnChiudiT1 = findViewById(R.id.chiudiT1);
         Button btnApriT2 = findViewById(R.id.apriT2);
         Button btnChiudiT2 = findViewById(R.id.chiudiT2);
+        Button pedro = findViewById(R.id.pedro);
+        Button luce2p = findViewById(R.id.btnLuce2p);
 
         Button btnStop = findViewById(R.id.stop);
         Button btnFloor = findViewById(R.id.floor);
@@ -134,17 +137,21 @@ public class MainActivityT extends Activity {
                 new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Power1%20Off","","http://192.168.1.207/cm?cmnd=Power2%20Off");
             }
         });
+
         btnApri.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (intDispo == 1){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power1%20Off","","http://192.168.1.202/cm?cmnd=Power2%20On");
+                if (intDispo == 1 && canvas1.intPiano == 1){
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","http://192.168.1.202/cm?cmnd=Power2%20On");
                 }
-                if (intDispo == 2){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power3%20Off","","http://192.168.1.202/cm?cmnd=Power4%20On");
+                if (intDispo == 2 && canvas1.intPiano == 1){
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime4%20128","","http://192.168.1.202/cm?cmnd=Power4%20On");
                 }
-                if (intDispo == 3){
-                    new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power%20On","","");
+                if (intDispo == 3 && canvas1.intPiano == 1){
+                    new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime1%20100","","http://192.168.1.203/cm?cmnd=Power1%20On");
+                }
+                if (intDispo == 4 && canvas1.intPiano == 1){
+                    new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power1%20On","","");
                 }
                 if (intDispo == 0){
                     Toast.makeText(getApplicationContext(), "Seleziona prima il\n     dispositivo",
@@ -162,13 +169,16 @@ public class MainActivityT extends Activity {
             @Override
             public void onClick(View view) {
 
-                if (intDispo == 1){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power2%20Off","","http://192.168.1.202/cm?cmnd=Power1%20On");
+                 if (intDispo == 1){
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime1%20128","","http://192.168.1.202/cm?cmnd=Power1%20On");
                 }
                 if (intDispo == 2){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power4%20Off","","http://192.168.1.202/cm?cmnd=Power3%20On");
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","http://192.168.1.202/cm?cmnd=Power3%20On");
                 }
                 if (intDispo == 3){
+                    new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20100","","http://192.168.1.203/cm?cmnd=Power2%20On");
+                }
+                if (intDispo == 4){
                     new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power%20Off","","");
                 }
                 if (intDispo == 0){
@@ -181,36 +191,71 @@ public class MainActivityT extends Activity {
         btnApriT1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power1%20Off","","http://192.168.1.202/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power3%20Off","","http://192.168.1.202/cm?cmnd=Power4%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%20128","","http://192.168.1.202/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime4%20128","","http://192.168.1.202/cm?cmnd=Power4%20On");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime1%20100","","http://192.168.1.203/cm?cmnd=Power1%20On");
                 return false;
             }
         });
         btnChiudiT1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power2%20Off","","http://192.168.1.202/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power4%20Off","","http://192.168.1.202/cm?cmnd=Power3%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%20128","","http://192.168.1.202/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%20128","","http://192.168.1.202/cm?cmnd=Power3%20On");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20128","","http://192.168.1.203/cm?cmnd=Power2%20On");
                 return false;
             }
         });
         btnApriT2.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Power2%20Off","","http://192.168.1.204/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Power2%20Off","","http://192.168.1.205/cm?cmnd=Power1%20On");
-                return false;
-            }
-        });
-        btnChiudiT2.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Power%20Off","","http://192.168.1.204/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Power%20Off","","http://192.168.1.205/cm?cmnd=Power2%20On");
+
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime1%20120","","http://192.168.1.204/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime1%20160","","http://192.168.1.205/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime1%20160","","http://192.168.1.206/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime1%20160","","http://192.168.1.207/cm?cmnd=Power1%20On");
                 return false;
             }
         });
 
+
+        btnChiudiT2.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime2%20120","","http://192.168.1.204/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime2%20160","","http://192.168.1.205/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime2%20160","","http://192.168.1.206/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime2%20160","","http://192.168.1.207/cm?cmnd=Power2%20On");
+                return false;
+            }
+        });
+        luce2p.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime1%2030","","http://192.168.1.204/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime1%2030","","http://192.168.1.205/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime1%2030","","http://192.168.1.206/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime1%2030","","http://192.168.1.207/cm?cmnd=Power1%20On");
+                return false;
+            }
+        });
+
+        pedro.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime1%20128","","http://192.168.1.202/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","http://192.168.1.202/cm?cmnd=Power3%20On");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20128","","http://192.168.1.203/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime2%20160","","http://192.168.1.204/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime2%20160","","http://192.168.1.205/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime2%20160","","http://192.168.1.206/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime2%20160","","http://192.168.1.207/cm?cmnd=Power2%20On");
+                mHandler.post(mpedroRunnable);
+                return false;
+            }
+        });
 
 
 
@@ -360,22 +405,25 @@ public class MainActivityT extends Activity {
                 txtDispo.setText("Tapparella2");
                 intDispo = 2;
             }
+            if (rectTapp3.contains(x,y)) {
+                Log.i("XY", "boom3!");
+                txtDispo.setText("TapparellaBagno");
+                intDispo = 3;
+            }
             if (rectLuceTenda.contains(x,y)) {
                 Log.i("XY", "BOOM2!");
                 txtDispo.setText("LuceTenda");
-                intDispo = 3;
+                intDispo = 4;
             }
-            if (rectClear.contains(x,y)) {
-                Log.i("XY", "CLEAR!");
-                txtDispo.setText("---");
-                intDispo = 0;
-            }
+
         }
 
 
 
         return false;
     }
+//-----------------auto off schermo-------------------------
+//-----------------auto off schermo-------------------------
 
     private Runnable mBlinkRunnable = new Runnable() {
         @Override
@@ -409,6 +457,14 @@ public class MainActivityT extends Activity {
                 Log.i("displ", "State set to off");
                 txtDispo.setText("---");
                 intDispo = 0;
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime1%20128","","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20128","","");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime2%20128","","");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime2%20128","","");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime2%20128","","");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime2%20128","","");
+
 
                 // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
 
@@ -417,4 +473,53 @@ public class MainActivityT extends Activity {
             }
         }
     };
+    //-------------------------------------------------------
+
+    //-----------------auto pedro-------------------------
+    //-----------------auto pedro-------------------------
+
+    private Runnable mpedroRunnable = new Runnable() {
+        @Override
+        public void run() {
+            // Exit Runnable if the GPIO is already closed
+            if (mLedGpio == null) {
+                return;
+            }
+            try {
+                // Toggle the GPIO state
+                mLedGpio.setValue(true);
+                Log.i("displ", "pedro on");
+                mHandler.postDelayed(mPedroRunnableoff, 1000*35);
+
+            } catch (IOException e) {
+
+            }
+        }
+    };
+
+    private Runnable mPedroRunnableoff = new Runnable() {
+        @Override
+        public void run() {
+            // Exit Runnable if the GPIO is already closed
+            if (mLedGpio == null) {
+                return;
+            }
+            try {
+                // Toggle the GPIO state
+                mLedGpio.setValue(false);
+                Log.i("displ", "pedro off");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%2070","","http://192.168.1.202/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime4%2070","","http://192.168.1.202/cm?cmnd=Power4%20On");
+
+
+
+                // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
+
+            } catch (IOException e) {
+
+            }
+        }
+    };
+    //-------------------------------------------------------
+
 }

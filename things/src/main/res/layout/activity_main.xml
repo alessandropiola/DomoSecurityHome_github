@@ -114,7 +114,29 @@
         android:layout_marginBottom="8dp"
         android:layout_marginStart="8dp"
         android:text="piano"
+        android:textColor="?android:attr/colorAccent"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/pedro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="pedro"
+        app:layout_constraintBottom_toTopOf="@+id/btnLuce2p"
+        app:layout_constraintStart_toEndOf="@+id/floor" />
+
+    <Button
+        android:id="@+id/btnLuce2p"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Luce2p"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/floor" />
 
 </android.support.constraint.ConstraintLayout>
