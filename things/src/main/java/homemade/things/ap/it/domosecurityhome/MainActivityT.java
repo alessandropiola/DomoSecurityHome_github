@@ -127,14 +127,14 @@ public class MainActivityT extends Activity {
             @Override
             public void onClick(View view) {
                 new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power1%20Off","","");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power1%20Off","","http://192.168.1.202/cm?cmnd=Power2%20Off");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Power3%20Off","","http://192.168.1.202/cm?cmnd=Power4%20Off");
-                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Power1%20Off","","http://192.168.1.203/cm?cmnd=Power2%20Off");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog Power1%20Off;Power2%20Off","","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog Power3%20Off;Power4%20Off","","");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Backlog Power1%20Off;Power2%20Off","","");
 
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Power1%20Off","","http://192.168.1.204/cm?cmnd=Power2%20Off");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Power1%20Off","","http://192.168.1.205/cm?cmnd=Power2%20Off");
-                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=Power1%20Off","","http://192.168.1.206/cm?cmnd=Power2%20Off");
-                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Power1%20Off","","http://192.168.1.207/cm?cmnd=Power2%20Off");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Backlog Power1%20Off;Power2%20Off","","");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Backlog Power1%20Off;Power2%20Off","","");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=Backlog Power1%20Off;Power2%20Off","","");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Backlog Power1%20Off;Power2%20Off","","");
             }
         });
 
@@ -142,13 +142,13 @@ public class MainActivityT extends Activity {
             @Override
             public void onClick(View view) {
                 if (intDispo == 1 && canvas1.intPiano == 1){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","http://192.168.1.202/cm?cmnd=Power2%20On");
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime3%20"+time.Tapparella1+";Power2%20On","","");
                 }
                 if (intDispo == 2 && canvas1.intPiano == 1){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime4%20128","","http://192.168.1.202/cm?cmnd=Power4%20On");
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime4%20"+time.Tapparella2+";Power4%20On","","");
                 }
                 if (intDispo == 3 && canvas1.intPiano == 1){
-                    new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime1%20100","","http://192.168.1.203/cm?cmnd=Power1%20On");
+                    new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Backlog PulseTime1%20"+time.TapparellaBagno+";Power1%20On","","");
                 }
                 if (intDispo == 4 && canvas1.intPiano == 1){
                     new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power1%20On","","");
@@ -170,13 +170,13 @@ public class MainActivityT extends Activity {
             public void onClick(View view) {
 
                  if (intDispo == 1){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime1%20128","","http://192.168.1.202/cm?cmnd=Power1%20On");
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime1%20"+time.Tapparella1+";Power1%20On","","");
                 }
                 if (intDispo == 2){
-                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","http://192.168.1.202/cm?cmnd=Power3%20On");
+                    new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime3%20"+time.Tapparella2+";Power3%20On","","");
                 }
                 if (intDispo == 3){
-                    new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20100","","http://192.168.1.203/cm?cmnd=Power2%20On");
+                    new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Backlog PulseTime2%20"+time.TapparellaBagno+";Power2%20On","","");
                 }
                 if (intDispo == 4){
                     new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power%20Off","","");
@@ -191,18 +191,19 @@ public class MainActivityT extends Activity {
         btnApriT1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%20128","","http://192.168.1.202/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime4%20128","","http://192.168.1.202/cm?cmnd=Power4%20On");
-                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime1%20100","","http://192.168.1.203/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime2%20"+time.Tapparella1+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime4%20"+time.Tapparella2+";Power4%20On","","");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Backlog PulseTime1%20"+time.TapparellaBagno+";Power1%20On","","");
                 return false;
             }
         });
         btnChiudiT1.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%20128","","http://192.168.1.202/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%20128","","http://192.168.1.202/cm?cmnd=Power3%20On");
-                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20128","","http://192.168.1.203/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime2%20"+time.Tapparella1+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime2%20"+time.Tapparella2+";Power3%20On","","");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Backlog PulseTime2%20"+time.TapparellaBagno+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power%20Off","","");
                 return false;
             }
         });
@@ -210,10 +211,10 @@ public class MainActivityT extends Activity {
             @Override
             public boolean onLongClick(View view) {
 
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime1%20120","","http://192.168.1.204/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime1%20160","","http://192.168.1.205/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime1%20160","","http://192.168.1.206/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime1%20160","","http://192.168.1.207/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Backlog PulseTime1%20"+time.FrangiBagno+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Backlog PulseTime1%20"+time.FrangiMatrim+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=Backlog PulseTime1%20"+time.FrangiDav+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Backlog PulseTime1%20"+time.FrangiGio+";Power1%20On","","");
                 return false;
             }
         });
@@ -223,10 +224,10 @@ public class MainActivityT extends Activity {
             @Override
             public boolean onLongClick(View view) {
 
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime2%20120","","http://192.168.1.204/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime2%20160","","http://192.168.1.205/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime2%20160","","http://192.168.1.206/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime2%20160","","http://192.168.1.207/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Backlog PulseTime2%20"+time.FrangiBagno+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Backlog PulseTime2%20"+time.FrangiMatrim+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=Backlog PulseTime2%20"+time.FrangiDav+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Backlog PulseTime2%20"+time.FrangiGio+";Power2%20On","","");
                 return false;
             }
         });
@@ -234,10 +235,10 @@ public class MainActivityT extends Activity {
             @Override
             public boolean onLongClick(View view) {
 
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime1%2030","","http://192.168.1.204/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime1%2030","","http://192.168.1.205/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime1%2030","","http://192.168.1.206/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime1%2030","","http://192.168.1.207/cm?cmnd=Power1%20On");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Backlog PulseTime1%20"+time.FrangiSun+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Backlog PulseTime1%20"+time.FrangiSun+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=Backlog PulseTime1%20"+time.FrangiSun+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Backlog PulseTime1%20"+time.FrangiSun+";Power1%20On","","");
                 return false;
             }
         });
@@ -245,13 +246,14 @@ public class MainActivityT extends Activity {
         pedro.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime1%20128","","http://192.168.1.202/cm?cmnd=Power1%20On");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","http://192.168.1.202/cm?cmnd=Power3%20On");
-                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20128","","http://192.168.1.203/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime2%20160","","http://192.168.1.204/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime2%20160","","http://192.168.1.205/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime2%20160","","http://192.168.1.206/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime2%20160","","http://192.168.1.207/cm?cmnd=Power2%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime1%20"+time.Tapparella1+";Power1%20On","","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime3%20"+time.Tapparella2+";Power3%20On","","");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Backlog PulseTime2%20"+time.TapparellaBagno+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Backlog PulseTime2%20"+time.FrangiBagno+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Backlog PulseTime2%20"+time.FrangiMatrim+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=Backlog PulseTime2%20"+time.FrangiDav+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Backlog PulseTime2%20"+time.FrangiGio+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.201/cm?cmnd=Power%20Off","","");
                 mHandler.post(mpedroRunnable);
                 return false;
             }
@@ -436,7 +438,7 @@ public class MainActivityT extends Activity {
                 // Toggle the GPIO state
                 mLedGpio.setValue(true);
                 Log.i("displ", "State set to on");
-                mHandler.postDelayed(mBlinkRunnableoff, 1000*60*5);
+                mHandler.postDelayed(mBlinkRunnableoff, 1000*60*3);
 
             } catch (IOException e) {
                 Log.e("displ", "Error on PeripheralIO API", e);
@@ -457,13 +459,13 @@ public class MainActivityT extends Activity {
                 Log.i("displ", "State set to off");
                 txtDispo.setText("---");
                 intDispo = 0;
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime1%20128","","");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime3%20128","","");
-                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=PulseTime2%20128","","");
-                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=PulseTime2%20128","","");
-                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=PulseTime2%20128","","");
-                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=PulseTime2%20128","","");
-                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=PulseTime2%20128","","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime1%20"+time.Tapparella1+"; PulseTime2%20"+time.Tapparella1,"","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime3%20"+time.Tapparella2+"; PulseTime4%20"+time.Tapparella2,"","");
+                new GetTaskDone().execute("http://192.168.1.203/cm?cmnd=Backlog PulseTime1%20"+time.TapparellaBagno+"; PulseTime2%20"+time.TapparellaBagno,"","");
+                new GetTaskDone().execute("http://192.168.1.204/cm?cmnd=Backlog PulseTime1%20"+time.FrangiBagno+"; PulseTime2%20"+time.FrangiBagno,"","");
+                new GetTaskDone().execute("http://192.168.1.205/cm?cmnd=Backlog PulseTime1%20"+time.FrangiMatrim+"; PulseTime2%20"+time.FrangiMatrim,"","");
+                new GetTaskDone().execute("http://192.168.1.206/cm?cmnd=Backlog PulseTime1%20"+time.FrangiDav+"; PulseTime2%20"+time.FrangiDav,"","");
+                new GetTaskDone().execute("http://192.168.1.207/cm?cmnd=Backlog PulseTime1%20"+time.FrangiGio+"; PulseTime2%20"+time.FrangiGio,"","");
 
 
                 // Reschedule the same runnable in {#INTERVAL_BETWEEN_BLINKS_MS} milliseconds
@@ -508,8 +510,8 @@ public class MainActivityT extends Activity {
                 // Toggle the GPIO state
                 mLedGpio.setValue(false);
                 Log.i("displ", "pedro off");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime2%2070","","http://192.168.1.202/cm?cmnd=Power2%20On");
-                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=PulseTime4%2070","","http://192.168.1.202/cm?cmnd=Power4%20On");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime2%20"+time.TapparellePedro+";Power2%20On","","");
+                new GetTaskDone().execute("http://192.168.1.202/cm?cmnd=Backlog PulseTime4%20"+time.TapparellePedro+";Power4%20On","","");
 
 
 
